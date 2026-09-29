@@ -18,7 +18,7 @@ def decode(val):
     return return_string
 
 def load_characters():
-    with open(r"input.txt", "r") as f:
+    with open(r"input.txt", "r", encoding="utf-8") as f:
         data = f.read()
         return sorted(set(data))
 
@@ -27,14 +27,19 @@ def build_encoder_decoder_dict(characters):
         stoi[character] = index
         itos[index] = character
 
+def test():
+    assert decode(encode("text")) == "text"
+
 def main():
     characters = load_characters()
     build_encoder_decoder_dict(characters)
 
     encoded_val = encode("First Citizen")
+    test()
     print(f"Encoded Value: {encoded_val}")
     decoded_val = decode(encoded_val)
     print(f"Decoded Value: {decoded_val}")
+    
 
 if __name__ == "__main__":
     main()
