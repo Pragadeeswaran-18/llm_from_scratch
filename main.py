@@ -30,16 +30,19 @@ def build_encoder_decoder_dict(characters):
 def test():
     assert decode(encode("text")) == "text"
 
+def get_batch(encoded_data):
+    n = int(len(encoded_data) * 0.8)
+    return encoded_data[:n], encoded_data[n:]
+    
+
 def main():
     characters = load_characters()
     build_encoder_decoder_dict(characters)
-
-    encoded_val = encode("First Citizen")
-    test()
-    print(f"Encoded Value: {encoded_val}")
-    decoded_val = decode(encoded_val)
-    print(f"Decoded Value: {decoded_val}")
-    
+    encoded_data = None
+    with open(r"input.txt", "r", encoding="utf-8") as f:
+        data = f.read()
+        encoded_data = encode(data)
+    train_set, test_set = get_batch(encoded_data)
 
 if __name__ == "__main__":
     main()
