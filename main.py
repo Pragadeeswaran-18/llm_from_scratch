@@ -18,13 +18,9 @@ def decode(val):
     return return_string
 
 def load_characters():
-    characters = []
     with open(r"input.txt", "r") as f:
         data = f.read()
-        for each_character in data:
-            if each_character not in characters:
-                characters.append(each_character)
-    return characters
+        return sorted(set(data))
 
 def build_encoder_decoder_dict(characters):
     for index, character in enumerate(characters):
@@ -35,10 +31,10 @@ def main():
     characters = load_characters()
     build_encoder_decoder_dict(characters)
 
-    encoded_val = encode("Hello World")
+    encoded_val = encode("First Citizen")
     print(f"Encoded Value: {encoded_val}")
-    decodeed_val = decode(encoded_val)
-    print(f"Decoded Value: {decodeed_val}")
+    decoded_val = decode(encoded_val)
+    print(f"Decoded Value: {decoded_val}")
 
 if __name__ == "__main__":
     main()
